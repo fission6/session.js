@@ -274,6 +274,10 @@ var session_fetch = (function(win, doc, nav){
         nav.geolocation.getCurrentPosition(function(pos){
           pos.source = 'html5';
           callback(pos);
+          util.set_cookie(
+            options.location_cookie,
+            util.package_obj(pos),
+            options.location_cookie_timeout * 60 * 60 * 1000);
         }, function(err) {
           if (options.gapi_location){
             modules.gapi_location()(callback);
